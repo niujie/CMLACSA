@@ -62,7 +62,10 @@ def rotate_about(x,y,angle):
     Output:  Corresponding 3x3 rotation matrix.
     It might be helpful to use procedures you already wrote.
     '''
-    pass
+    output = translation(-x,-y)
+    output = rotation(angle) * output
+    output = translation(x,y) * output
+    return output
 
 ## Task 6
 def reflect_y():
