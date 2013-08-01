@@ -12,7 +12,10 @@ def identity(labels = {'x','y','u'}):
     identity().  Additionally, if you want {'r','g','b'}, or another set, to be the
     labels of your matrix, you can call identity({'r','g','b'}).  
     '''
-    pass
+    output = Mat((labels,labels),{})
+    for i in labels:
+    	output[i,i] = 1
+    return output
 
 ## Task 2
 def translation(x,y):
@@ -20,7 +23,11 @@ def translation(x,y):
     Input:  An x and y value by which to translate an image.
     Output:  Corresponding 3x3 translation matrix.
     '''
-    pass
+    output = identity()
+    output['x','u'] = x
+    output['y','u'] = y
+    return output
+
 
 ## Task 3
 def scale(a, b):
@@ -28,7 +35,10 @@ def scale(a, b):
     Input:  Scaling parameters for the x and y direction.
     Output:  Corresponding 3x3 scaling matrix.
     '''
-    pass
+    output = identity()
+    output['x','x'] = a
+    output['y','y'] = b
+    return output
 
 ## Task 4
 def rotation(angle):
@@ -37,7 +47,12 @@ def rotation(angle):
     Output:  Corresponding 3x3 rotation matrix.
     Note that the math module is imported.
     '''
-    pass
+    output = identity()
+    output['x','x'] = math.cos(angle)
+    output['x','y'] =-math.sin(angle)
+    output['y','x'] = math.sin(angle)
+    output['y','y'] = math.cos(angle)
+    return output
 
 ## Task 5
 def rotate_about(x,y,angle):
