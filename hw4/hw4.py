@@ -119,17 +119,17 @@ sum_to_zero_4 = [one, one, one, one, one, 0, 0]
 ## Problem 11
 ## Please express your answer a list of ints, such as [1,0,0,0,0]
 
-exchange_1 = []
-exchange_2 = []
-exchange_3 = []
+exchange_1 = [0,0,1,0,0]
+exchange_2 = [0,0,0,1,0]
+exchange_3 = [0,0,0,0,1]
 
 
 ## Problem 12
 # Please give the name of the vector you want to replace as a string (e.g. 'v1')
 
-replace_1 = []
-replace_2 = []
-replace_3 = []
+replace_1 = 'v3'
+replace_2 = 'v1'
+replace_3 = 'v1'
 
 
 
@@ -148,7 +148,8 @@ def rep2vec(u, veclist):
         >>> rep2vec(Vec({0,1,2}, {0:2, 1:4, 2:6}), [a0,a1,a2]) == Vec({'a', 'c', 'b', 'd'},{'a': 2, 'c': 6, 'b': 4, 'd': 0})
         True
     '''
-    pass
+    from matutil import rowdict2mat
+    return u * rowdict2mat(veclist)
 
 
 
@@ -168,7 +169,7 @@ def vec2rep(veclist, v):
         >>> vec2rep([a0,a1,a2], Vec({'a','b','c','d'}, {'a':3, 'c':-2})) == Vec({0, 1, 2},{0: 3.0, 1: 0.0, 2: -2.0})
         True
     '''
-    pass
+    return solve(coldict2mat(veclist), v)
 
 
 
@@ -197,7 +198,17 @@ def is_superfluous(L, i):
         >>> is_superfluous([a0,a1,a2,a3], 1)
         False
     '''
-    pass
+    b = L[i]
+    if i == 0:
+        A = coldict2mat(L[i+1:])
+    elif i == len(L)-1:
+        A = coldict2mat(L[0:i])
+    else:
+        A = coldict2mat(L[0:i-1]+L[i+1:])
+    u = solve(A, b)
+    r = b - A * u
+    return True if r*r < 1.0e-14 else False
+     
 
 
 
@@ -224,7 +235,10 @@ def is_independent(L):
     >>> is_independent(vlist[5:])
     True
     '''
-    pass
+    for i in range(len(L)):
+        if is_superfluous(L,i):
+            return False
+    return True
 
 
 
@@ -246,7 +260,11 @@ def superset_basis(S, L):
         >>> superset_basis([a0, a3], [a0, a1, a2]) == [Vec({'a', 'c', 'b', 'd'},{'a': 1}), Vec({'a', 'c', 'b', 'd'},{'b':1}),Vec({'a', 'c', 'b', 'd'},{'c': 1})]
         True
     '''
-    pass
+    output = S
+    for v in L:
+        if is_independent(output+[v]):
+            output = output + [v]
+    return output
 
 
 
@@ -265,4 +283,13 @@ def exchange(S, A, z):
         >>> exchange(S, A, z) == Vec({0, 1, 2, 3},{0: 0, 1: 0, 2: 1, 3: 0})
         True
     '''
-    pass
+    for w in S:
+        if w not in A:
+            temp = list(S)
+            temp.remove(w)
+            temp = temp + [z]
+            r = w - solve(coldict2mat(temp), w)
+            print(r)
+            print(r*r)
+            if r*r < 1.0e-14:
+                return w
