@@ -79,20 +79,20 @@ linear_dep_R_3 = [1,1,1,1,1]
 # Assign sum_to to the vector that you are expressing as a linear combination
 # of the other two.  Write the name of the vector as a STRING.  i.e. 'u' or 'w'
 
-u = []
-v = []
-w = []
-sum_to = []
+u = 1
+v = 1
+w = 1
+sum_to = 'v'
 
 
 
 ## Problem 8
 # Please use the Vec class to represent your vectors
 
-indep_vec_1 = Vec({}, {})
-indep_vec_2 = Vec({}, {})
-indep_vec_3 = Vec({}, {})
-indep_vec_4 = Vec({}, {})
+indep_vec_1 = Vec({0,1,2,3}, {})
+indep_vec_2 = Vec({0,1,2,3}, {})
+indep_vec_3 = Vec({0,1,2,3}, {})
+indep_vec_4 = Vec({0,1,2,3}, {})
 
 
 
