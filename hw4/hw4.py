@@ -89,19 +89,19 @@ sum_to = 'v'
 ## Problem 8
 # Please use the Vec class to represent your vectors
 
-indep_vec_1 = Vec({0,1,2,3}, {})
-indep_vec_2 = Vec({0,1,2,3}, {})
-indep_vec_3 = Vec({0,1,2,3}, {})
-indep_vec_4 = Vec({0,1,2,3}, {})
+indep_vec_1 = Vec({0,1,2}, {0:one, 1:0, 2:0})
+indep_vec_2 = Vec({0,1,2}, {0:0, 1:0, 2:one})
+indep_vec_3 = Vec({0,1,2}, {0:0, 1:one, 2:0})
+indep_vec_4 = Vec({0,1,2}, {0:one, 1:one, 2:one})
 
 
 
 ## Problem 9
 # Please give your solution as a list of coefficients of the linear combination
 
-zero_comb_1 = []
-zero_comb_2 = []
-zero_comb_3 = []
+zero_comb_1 = [one, one, 0, one]
+zero_comb_2 = [0, one, one, one]
+zero_comb_3 = [one, one, 0, 0, one]
 
 
 
@@ -109,10 +109,10 @@ zero_comb_3 = []
 # Please give your solution as a list of coefficients of the vectors
 # in the set in order (list the coefficient for v_i before v_j if i < j).
 
-sum_to_zero_1 = []
-sum_to_zero_2 = []
-sum_to_zero_3 = []
-sum_to_zero_4 = []
+sum_to_zero_1 = [0, one, 0, one, one]
+sum_to_zero_2 = [0, one, 0, one, one, 0, 0]
+sum_to_zero_3 = [one, 0, one, one, one]
+sum_to_zero_4 = [one, one, one, one, one, 0, 0]
 
 
 
@@ -266,4 +266,3 @@ def exchange(S, A, z):
         True
     '''
     pass
-
