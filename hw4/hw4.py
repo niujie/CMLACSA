@@ -148,8 +148,7 @@ def rep2vec(u, veclist):
         >>> rep2vec(Vec({0,1,2}, {0:2, 1:4, 2:6}), [a0,a1,a2]) == Vec({'a', 'c', 'b', 'd'},{'a': 2, 'c': 6, 'b': 4, 'd': 0})
         True
     '''
-    from matutil import rowdict2mat
-    return u * rowdict2mat(veclist)
+    return coldict2mat(veclist) * u
 
 
 
@@ -287,9 +286,5 @@ def exchange(S, A, z):
         if w not in A:
             temp = list(S)
             temp.remove(w)
-            temp = temp + [z]
-            r = w - solve(coldict2mat(temp), w)
-            print(r)
-            print(r*r)
-            if r*r < 1.0e-14:
+            if vec2rep(temp, z) != Vec(vec2rep(temp, z).D, {}):
                 return w
