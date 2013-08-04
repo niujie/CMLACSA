@@ -284,7 +284,9 @@ def exchange(S, A, z):
     '''
     for w in S:
         if w not in A:
-            temp = list(S)
+            temp = [z] + S
             temp.remove(w)
-            if vec2rep(temp, z) != Vec(vec2rep(temp, z).D, {}):
+            temp = coldict2mat(temp)
+            r = w - temp * solve(temp, w)
+            if w != z and r*r < 1.0e-14:
                 return w
