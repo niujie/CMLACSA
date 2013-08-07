@@ -54,4 +54,8 @@ def mat_move2board(Y):
           whiteboard plane (the point of intersection with the whiteboard plane 
           of the line through the origin and q).
     '''
-    pass
+    from matutil import mat2coldict, coldict2mat
+    Y_in = mat2coldict(Y)
+    for i in Y_in.keys():
+        Y_in[i] = move2board(Y_in[i])
+    return coldict2mat(Y_in)
