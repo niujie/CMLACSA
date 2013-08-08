@@ -205,9 +205,9 @@ def find_matrix_inverse(A):
     True
     '''
     sol = []
-    for i in A.D[1]:
-        sol = sol + solve(A, Vec(A.D[0],{i:1}))
-    return 
+    for i in A.D[0]:
+        sol = sol + [solve(A, Vec(A.D[0],{i:one}))]
+    return coldict2mat(sol)
 
 
 ## Problem 12
@@ -219,4 +219,11 @@ def find_triangular_matrix_inverse(A):
     >>> find_triangular_matrix_inverse(A) == Mat(({0, 1, 2, 3}, {0, 1, 2, 3}), {(0, 1): -0.5, (1, 2): -0.3, (3, 2): 0.0, (0, 0): 1.0, (3, 3): 1.0, (3, 0): 0.0, (3, 1): 0.0, (2, 1): 0.0, (0, 2): -0.05000000000000002, (2, 0): 0.0, (1, 3): -0.87, (2, 3): -0.1, (2, 2): 1.0, (1, 0): 0.0, (0, 3): -3.545, (1, 1): 1.0})
     True
     '''
-    pass
+    from triangular import triangular_solve
+    from matutil import mat2rowdict
+    sol = []
+    rowlist = mat2rowdict(A)
+    label_list = list(rowlist[0].D)
+    for i in A.D[0]:
+        sol = sol + [triangular_solve(rowlist,label_list,Vec(A.D[0],{i:1}))]
+    return coldict2mat(sol)
