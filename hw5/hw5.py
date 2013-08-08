@@ -108,7 +108,8 @@ def my_is_independent(L):
     >>> my_is_independent(L[2:5])
     False
     '''
-    pass
+    from independence import rank
+    return True if rank(L) == len(L) else False
 
 
 ## Problem 6
@@ -125,7 +126,11 @@ def subset_basis(T):
     >>> subset_basis([a0,a1,a2,a3]) == [Vec({'c', 'b', 'a', 'd'},{'a': 1}), Vec({'c', 'b', 'a', 'd'},{'b': 1}), Vec({'c', 'b', 'a', 'd'},{'c': 1})]
     True
     '''
-    pass
+    output = []
+    for v in T:
+        if my_is_independent(output+[v]):
+            output = output + [v]
+    return output
 
 
 
@@ -138,15 +143,15 @@ def my_rank(L):
     >>> my_rank([list2vec(v) for v in [[1,2,3],[4,5,6],[1.1,1.1,1.1]]])
     2
     '''
-    pass
+    return len(subset_basis(L))
 
 
 ## Problem 8
 # Please give each answer as a boolean
 
-only_share_the_zero_vector_1 = ...
-only_share_the_zero_vector_2 = ...
-only_share_the_zero_vector_3 = ...
+only_share_the_zero_vector_1 = True
+only_share_the_zero_vector_2 = True
+only_share_the_zero_vector_3 = True
 
 
 
@@ -165,7 +170,9 @@ def direct_sum_decompose(U_basis, V_basis, w):
     >>> direct_sum_decompose(U_basis, V_basis, w) == (Vec({0, 1, 2, 3, 4, 5},{0: 2.0, 1: 4.999999999999972, 2: 0.0, 3: 0.0, 4: 1.0, 5: 0.0}), Vec({0, 1, 2, 3, 4, 5},{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0, 5: 0.0}))
     True
     '''
-    pass
+    u = coldict2mat(U_basis) * solve(coldict2mat(U_basis),w)
+    v = coldict2mat(V_basis) * solve(coldict2mat(V_basis),w)
+    return (u,v)
 
 
 
@@ -179,8 +186,13 @@ def is_invertible(M):
     >>> is_invertible(M)
     True
     '''
-    pass
-
+    from matutil import mat2coldict
+    from independence import rank
+    if len(M.D[0]) == len(M.D[1]):
+        M = mat2coldict(M)
+        M = list(M.values())
+        return rank(M) == len(M)
+    return False
 
 ## Problem 11
 def find_matrix_inverse(A):
@@ -192,8 +204,10 @@ def find_matrix_inverse(A):
     >>> find_matrix_inverse(M) == Mat(({0, 1, 2}, {0, 1, 2}), {(0, 1): one, (2, 0): 0, (0, 0): 0, (2, 2): one, (1, 0): one, (1, 2): 0, (1, 1): 0, (2, 1): 0, (0, 2): 0})
     True
     '''
-    pass
-
+    sol = []
+    for i in A.D[1]:
+        sol = sol + solve(A, Vec(A.D[0],{i:1}))
+    return 
 
 
 ## Problem 12
