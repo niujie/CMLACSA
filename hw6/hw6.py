@@ -123,46 +123,46 @@ def echelon_solve(rowlist, label_list, b):
 
 
 ## Problem 6
-rowlist = [ ... ]    # Provide as a list of Vec instances
-label_list = [ ... ] # Provide as a list
-b = [ ... ]          # Provide as a list
+rowlist = [Vec({'A', 'C', 'B', 'D'},{'A': one, 'C': 0, 'B': one, 'D': one}), Vec({'A', 'C', 'B', 'D'},{'A': 0, 'C': 0, 'B': one, 'D': 0}), Vec({'A', 'C', 'B', 'D'},{'A': 0, 'C': one, 'B': 0, 'D': 0}), Vec({'A', 'C', 'B', 'D'},{'A': 0, 'C': 0, 'B': 0, 'D': one})]    # Provide as a list of Vec instances
+label_list = ['A', 'B', 'C', 'D'] # Provide as a list
+b = [one,one,0,0]          # Provide as a list
 
 
 
 ## Problem 7
-null_space_rows_a = {...} # Put the row numbers of M from the PDF
+null_space_rows_a = {3,4} # Put the row numbers of M from the PDF
 
 
 
 ## Problem 8
-null_space_rows_b = {...}
+null_space_rows_b = {4}
 
 
 
 ## Problem 9
 # Write each vector as a list
-closest_vector_1 = [...]
-closest_vector_2 = [...]
-closest_vector_3 = [...]
+closest_vector_1 = [1.6, 3.2]
+closest_vector_2 = [0, 1, 0]
+closest_vector_3 = [3, 2, 1, -4]
 
 
 
 ## Problem 10
 # Write each vector as a list
 
-project_onto_1 = [...]
-projection_orthogonal_1 = [...]
+project_onto_1 = [2,0]
+projection_orthogonal_1 = [0,1]
 
-project_onto_2 = [...]
-projection_orthogonal_2 = [...]
+project_onto_2 = [-1/6,-1/3,1/6]
+projection_orthogonal_2 = [7/6,4/3,23/6]
 
-project_onto_3 = [...]
-projection_orthogonal_3 = [...]
+project_onto_3 = [1,1,4]
+projection_orthogonal_3 = [0,0,0]
 
 
 
 ## Problem 11
-norm1 = ...
-norm2 = ...
-norm3 = ...
+norm1 = 3
+norm2 = 4
+norm3 = 1
 
