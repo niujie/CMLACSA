@@ -85,12 +85,14 @@ def find_a_and_b(v, roots, N):
       such that a*a-b*b is a multiple of N
       (if v is correctly chosen)
     '''
-    alist = [roots[i] for i in v]
+    alist = [roots[i] for i in range(len(roots)) if v[i] != 0]
     a = prod(alist)
     c = prod([x*x-N for x in alist])
     b = intsqrt(c)
+    if b*b == c:
+        return (a, b)
 
 
 ## Task 5
 
-smallest_nontrivial_divisor_of_2461799993978700679 = ...
+smallest_nontrivial_divisor_of_2461799993978700679 = 1230926561
