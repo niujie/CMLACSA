@@ -99,7 +99,26 @@ def echelon_solve(rowlist, label_list, b):
     >>> echelon_solve(U_rows, cols, b_list)
     Vec({'B', 'C', 'A', 'D', 'E'},{'B': 0, 'C': one, 'A': one})
     '''
-    pass
+    new_rowlist = []
+    new_b = []
+    rows_left = set(range(len(rowlist)))
+    new_label_list = []
+    for c in label_list:
+        rows_with_nonzero = [r for r in rows_left if rowlist[r][c] != 0]
+        if rows_with_nonzero != []:
+            pivot = rows_with_nonzero[0]
+            rows_left.remove(pivot)
+            new_rowlist.append(rowlist[pivot])
+            new_b.append(b[pivot])
+            new_label_list.append(c)
+    from vecutil import zero_vec
+    D = rowlist[0].D
+    x = zero_vec(D)
+    for j in reversed(range(len(new_b))):
+        c = new_label_list[j]
+        row = new_rowlist[j]
+        x[c] = (new_b[j] - x*row)/row[c]
+    return x
 
 
 
