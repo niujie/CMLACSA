@@ -12,7 +12,7 @@ def equal(u,v):
     "Returns true iff u is equal to v"
     assert u.D == v.D
     for d in u.D:
-        if abs(getitem(u,d) - getitem(v,d)) > 1.0e-14:
+        if getitem(u,d) != getitem(v,d):
             return False
     return True
 
