@@ -59,7 +59,7 @@ def find_grad(A, b, w):
     Output:
         - Value of the gradient function at w
     '''
-    return sum(list((2*(A*w-b)*A).f.values()))
+    return 2*(A*w-b)*A
 
 ## Task 5 ##
 def gradient_descent_step(A, b, w, sigma):
@@ -73,5 +73,5 @@ def gradient_descent_step(A, b, w, sigma):
         - The vector w' resulting from 1 iteration of gradient descent
           starting from w and moving sigma.
     '''
-    pass
+    return w - sigma * find_grad(A, b, w)
 
