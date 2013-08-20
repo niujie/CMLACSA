@@ -31,7 +31,11 @@ def fraction_wrong(A, b, w):
         - Fraction (as a decimal in [0,1]) of vectors incorrectly
           classified by w
     '''
-    pass
+    output = 0
+    for r in b.D:
+    	if signum(A*w)[r] != b[r]:
+    		output =  output + 1
+    return output / len(b.D)
 
 ## Task 3 ##
 def loss(A, b, w):
@@ -43,7 +47,7 @@ def loss(A, b, w):
     Output:
         - Value of loss function at w for training data
     '''
-    pass
+    return (A*w-b)*(A*w-b)
 
 ## Task 4 ##
 def find_grad(A, b, w):
@@ -55,7 +59,7 @@ def find_grad(A, b, w):
     Output:
         - Value of the gradient function at w
     '''
-    pass
+    return sum(list((2*(A*w-b)*A).f.values()))
 
 ## Task 5 ##
 def gradient_descent_step(A, b, w, sigma):
